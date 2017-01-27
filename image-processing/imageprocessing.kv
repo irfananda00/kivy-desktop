@@ -1,0 +1,53 @@
+#:kivy 1.7.1
+
+<RootWidget>:
+  orientation: "horizontal"
+  img: img
+  AsyncImage:
+    id: img
+    size_hint: 0.6, 1
+    source: tbl.img_url.text
+  TableLayout:
+    id: tbl
+    size_hint: 0.4, 1
+
+<TableLayout>:
+  do_default_tab: False
+  img_url: img_url
+  img_height: img_height
+  img_width: img_width
+  TabbedPanelItem:
+    text: "File"
+    BoxLayout:
+      orientation: "horizontal"
+      size_hint: 1, None
+      Label:
+        text: "Image Source : "
+        font_size: "16sp"
+      TextInput:
+        id: img_url
+        text: ""
+        font_size: "16sp"
+  TabbedPanelItem:
+    text: "Edit"
+    BoxLayout:
+      orientation: "horizontal"
+      size_hint: 1, None
+      BoxLayout:
+        orientation: "vertical"
+        TextInput:
+          multiline: False
+          id: img_height
+          hint_text: "Height"
+          input_filter: "int"
+          font_size: "16sp"
+        TextInput:
+          multiline: False
+          id: img_width
+          hint_text: "Width"
+          input_filter: "int"
+          font_size: "16sp"
+      Button:
+        text: "Crop"
+        font_size: "16sp"
+        on_press: root.crop(img_height.text, img_width.text)
